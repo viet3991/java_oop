@@ -60,16 +60,23 @@ public class HumanResources {
 
         /* -------------------------------------------------------------------------------------------- */
 
-        // giới thiệu chương trình
-        gioiThieu();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("======================================================");
+        System.out.println("===================== HUMAN RESOURCES ================");
+        System.out.println("======================================================");
+        while (true) {
+            int menu;
+            gioiThieu();
+            String s = "Chọn chức năng (0 - 8):   ";
+            System.out.print(s);
+            // kiểm tra giá trị nhập vào có phải số nguyên hay ko?
+            menu = checkIn(s);
 
-        // biến chọn chức năng
-        int menu;
-        // tạo vòng lặp làm việc cho đến khi kết thúc (người dùng chọn 0)
-        do {
-            // gọi phương thức chọn chức năng
-            menu = chonChucNang();
-            // giá trị trả về sẽ gọi đến chức năng nhất định
+            if (menu == 0) {
+                ketThuc();
+                return;
+            }
+            //
             switch (menu) {
                 case 1 -> hienthiDanhSachNV(listStaff);
                 case 2 -> hienthiBoPhanCongTy(listStaff, listDep);
@@ -79,75 +86,44 @@ public class HumanResources {
                 case 6 -> hienthiBangLuongNV(listStaff);
                 case 7 -> hienthiBangLuongNVTangDan(listStaff);
                 case 8 -> hienthiBangLuongNVGiamDan(listStaff);
-
-//                default:
-//                    throw new IllegalStateException("Unexpected value: " + menu);
+                default -> {
+                    System.out.println("Vui lòng nhập lại !!! ---> Chỉ chấp nhận số từ 0 - 8 !!!");
+                    break;
+                }
             }
-        // nếu chọn 0 sẽ kết thúc chương trình
-        } while (menu != 0);
-
-        // gọi phuong thức thông báo kết thúc phiên làm việc
-        ketThuc();
-
+        }
     }
 
     // giới thiệu các chức năng để chọn
     public static void gioiThieu() {
-        System.out.println("==========================================================");
-        System.out.println("===================== HUMAN RESOURCES ====================");
-        System.out.println("==========================================================");
-        System.out.println("MENU -----------------------------------------------------");
-        System.out.println("1. Hiển thị danh sách nhân viên hiện có trong công ty");
-        System.out.println("2. Hiển thị các bộ phận trong công ty");
-        System.out.println("3. Hiển thị các nhân viên theo từng bộ phận");
-        System.out.println("4. Thêm nhân viên mới vào công ty: bao gồm 2 loại");
-        System.out.println("   - Thêm nhân viên thông thường ");
-        System.out.println("   - Thêm nhân viên là cấp quản lý (có thêm chức vụ)");
-        System.out.println("5. Tìm kiếm thông tin nhân viên theo tên hoặc mã nhân viên");
-        System.out.println("6. Hiển thị bảng lương của nhân viên toàn công ty");
-        System.out.println("7. Hiển thị bảng lương của nhân viên theo thứ tự tăng dần");
-        System.out.println("8. Hiển thị bảng lương của nhân viên theo thứ tự giảm dần");
-        System.out.println("0. Thoát khỏi phiên làm việc.");
-        System.out.println("----------------------------------------------------------");
+        System.out.println();
+        System.out.println("MENU ---------------------------------------------");
+        System.out.println("1. Danh sách NV trong công ty");
+        System.out.println("2. Danh sách các bộ phận");
+        System.out.println("3. Danh sách NV theo từng bộ phận");
+        System.out.println("4. Thêm NV: bao gồm 2 loại");
+        System.out.println("   - Thêm NV thông thường ");
+        System.out.println("   - Thêm NV là cấp quản lý (có thêm chức vụ)");
+        System.out.println("5. Tìm kiếm NV theo tên hoặc mã nhân viên");
+        System.out.println("6. Bảng lương của NV");
+        System.out.println("7. Bảng lương của NV theo thứ tự tăng dần");
+        System.out.println("8. Bảng lương của NV theo thứ tự giảm dần");
+        System.out.println("0. Thoát khỏi ứng dụng.");
+        System.out.println("---------------------------------------------------");
         System.out.println();
     }
 
-    // chọn chức năng
-    public static int chonChucNang() {
-        Scanner sc = new Scanner(System.in);
-        // biến chọn chức năng làm việc
-        int menu;
-        do {
-            System.out.print("Chọn chức năng (0 - 8):   ");
-            // kiểm tra giá trị nhập vào có phải số nguyên hay ko?
-            while (!sc.hasNextInt()) {
-                System.out.println("Vui lòng nhập lại !!! ---> Không phải số nguyên !!!");
-                System.out.print("Chọn chức năng (0 - 8):   ");
-                sc.nextLine();
-            }
-            menu = sc.nextInt();
-
-            if (menu != 0 && menu != 1 && menu != 2 && menu != 3 && menu != 4 && menu != 5 && menu != 6 && menu != 7
-                    && menu != 8) {
-                System.out.println("Vui lòng nhập lại !!! ---> Chỉ chấp nhận số từ 0 - 8 !!!");
-            }
-            // nếu biến chọn nằm ngoài con số từ 0 đến 8, phải chọn lại
-        } while(menu != 0 && menu != 1 && menu != 2 && menu != 3 && menu != 4 && menu != 5 && menu != 6 && menu != 7
-                && menu != 8);
-
-        return menu;
-    }
 
     // kết thúc chương trình
     public static void ketThuc() {
-        System.out.println("==========================================================");
-        System.out.println("====================== SEE YOU LATER =====================");
-        System.out.println("==========================================================");
+        System.out.println("=====================================================");
+        System.out.println("====================== SEE YOU LATER ================");
+        System.out.println("=====================================================");
     }
 
     // hiển thị danh sách toàn bộ nhân viên
     public static void hienthiDanhSachNV(ArrayList<Staff> listStaff) {
-        System.out.println("----------------------------------------------------------");
+
         System.out.println("1. Danh sách nhân viên -----------------------------------");
         System.out.println();
         System.out.printf("%-10s%-20s%-10s%-15s%-15s%-10s%-10s%-22s\n","MaNV", "TenNV", "Tuoi", "HesoLuong", "NgayVaoLam",
@@ -160,12 +136,12 @@ public class HumanResources {
             System.out.println();
         }
         System.out.println();
-        System.out.println("----------------------------------------------------------");
+
     }
 
     // hiển thị danh sách các bộ phận trong công ty
     public static void hienthiBoPhanCongTy(ArrayList<Staff> listStaff, ArrayList<Department> listDep) {
-        System.out.println("----------------------------------------------------------");
+
         System.out.println("2. Các bộ phận -------------------------------------------");
         System.out.println();
 
@@ -190,12 +166,12 @@ public class HumanResources {
             System.out.print(department);
         }
         System.out.println();
-        System.out.println("----------------------------------------------------------");
+
     }
 
     // hiển thị danh sách nhân viên theo từng bộ phận
     public static void hienthiNVTheoBoPhan(ArrayList<Staff> listStaff, ArrayList<Department> listDep) {
-        System.out.println("----------------------------------------------------------");
+
         System.out.println("3. Danh sách nhân viên theo bộ phận ----------------------");
         System.out.println();
         System.out.printf("%-10s%-20s%-10s%-15s%-15s%-10s%-10s%-22s\n","MaNV", "TenNV", "Tuoi", "HesoLuong", "NgayVaoLam",
@@ -215,28 +191,24 @@ public class HumanResources {
             }
         }
         System.out.println();
-        System.out.println("----------------------------------------------------------");
+
     }
 
     // thêm nhân viên hoặc quản lý
     public static void themNV(ArrayList<Staff> listStaff) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("----------------------------------------------------------");
-        System.out.println("4. Thêm nhân viên ----------------------------------------");
-        System.out.println("   - Chọn 1 để thêm Nhân viên ----------------------------");
-        System.out.println("   - Chọn 2 để thêm Quản lý ------------------------------");
+
+        System.out.println("4. Thêm nhân viên ---------------------------------");
+        System.out.println("   - Chọn 1 để thêm Nhân viên ---------------------");
+        System.out.println("   - Chọn 2 để thêm Quản lý -----------------------");
 
         // lựa chọn thêm nhân viên hay quản lý, chỉ cho phép nhập 1 hoặc 2
         int choose;
         do {
-            System.out.print("Chọn chức năng (1 hoặc 2):   ");
+            String s = "Chọn chức năng (1 hoặc 2):   ";
+            System.out.print(s);
             // kiểm tra giá trị nhập vào có phải số nguyên hay ko?
-            while (!sc.hasNextInt()) {
-                System.out.println("Vui lòng nhập lại !!! ---> Không phải số nguyên !!!");
-                System.out.print("Chọn chức năng (1 hoặc 2):   ");
-                sc.nextLine();
-            }
-            choose = sc.nextInt();
+            choose = checkIn(s);
             if (choose != 1 && choose != 2) {
                 System.out.println("Vui lòng nhập lại !!! ---> Chỉ chấp nhận 1 hoặc 2!!!");
             }
@@ -244,55 +216,64 @@ public class HumanResources {
 
         // nhập thông tin Nhân viên từ người dùng, thêm Nhân viên vào danh sách nhân viên
         if (choose == 1) {
-            System.out.println("----------------------------------------------------------");
-            System.out.print("Thêm bao nhiêu nhân viên:                 ");
-            int count = sc.nextInt();
+            System.out.println("---------------------------------------------------");
+            int count;
+            do {
+                String s = "Thêm bao nhiêu nhân viên:                 ";
+                System.out.print(s);
+                // kiểm tra giá trị nhập vào có phải số nguyên hay ko?
+                count = checkIn(s);
+                if (count <= 0) {
+                    System.out.println("Vui lòng nhập lại !!! ---> Chỉ chấp nhận số nguyên dương!!!");
+                }
+            } while(count <= 0);
+
             for (int i = 0; i < count; i++) {
                 System.out.println("----------------------------------------");
-                sc.nextLine();
                 System.out.print("Mã Nhân viên (E99,...):                 ");
                 String id = sc.nextLine().toUpperCase();
                 System.out.print("Tên Nhân viên:                          ");
                 String name = sc.nextLine();
                 System.out.print("Tuổi Nhân viên:                         ");
-                int age = sc.nextInt();
+                int age = Integer.parseInt(sc.nextLine());
                 System.out.print("Hệ số lương:                            ");
-                double coeff = sc.nextDouble();
+                double coeff = Double.parseDouble(sc.nextLine());
                 System.out.print("Ngày vào làm (DD/MM/YYYY):              ");
                 String dateStart = sc.next();
                 // gọi phương thức để chọn bộ phận làm việc cho nhân viên
                 Department nameDep = chonBoPhan(sc);
+                sc.nextLine();
                 //
                 System.out.print("Số ngày phép:                           ");
-                int dayOff = sc.nextInt();
+                int dayOff = Integer.parseInt(sc.nextLine());
                 System.out.print("Số giờ làm thêm:                        ");
-                double OT = sc.nextDouble();
+                double OT = Double.parseDouble(sc.nextLine());
                 // thêm 1 nhân viên danh sách nhân viên
                 listStaff.add(new Employee(id, name, age, coeff, dateStart, nameDep, dayOff, OT));
             }
         // nhập thông tin Quản lý từ người dùng, thêm Quản lý vào danh sách nhân viên
         } else {
-            System.out.println("----------------------------------------------------------");
-            System.out.print("Thêm bao nhiêu quản lý:                 ");
-            int count = sc.nextInt();
+            System.out.println("---------------------------------------------------");
+            String s2 = "Thêm bao nhiêu quản lý:                 ";
+            System.out.print(s2);
+            int count = checkIn(s2);
             for (int i = 0; i < count; i++) {
                 System.out.println("----------------------------------------");
-                sc.nextLine();
                 System.out.print("Mã Quản lý (M98,...):                   ");
                 String id = sc.nextLine().toUpperCase();
                 System.out.print("Tên Quản lý:                            ");
                 String name = sc.nextLine();
                 System.out.print("Tuổi Quản lý:                           ");
-                int age = sc.nextInt();
+                int age = Integer.parseInt(sc.nextLine());
                 System.out.print("Hệ số lương:                            ");
-                double coeff = sc.nextDouble();
+                double coeff = Double.parseDouble(sc.nextLine());
                 System.out.print("Ngày vào làm (DD/MM/YYYY):              ");
-                String dateStart = sc.next();
+                String dateStart = sc.nextLine();
                 // gọi phương thức để chọn bộ phận làm việc cho nhân viên
                 Department nameDep = chonBoPhan(sc);
                 //
                 System.out.print("Số ngày phép:                           ");
-                int dayOff = sc.nextInt();
+                int dayOff = Integer.parseInt(sc.next());
 
                 // chọn chức danh cho Quản lý, chỉ cho phép nhập 1 hoặc 2 hoặc 3
                 System.out.println("Chức danh ------------              ");
@@ -301,8 +282,10 @@ public class HumanResources {
                 System.out.println(" 3 - Technical Leader");
                 int chon;
                 do {
-                    System.out.print("Chọn chức danh:                         ");
-                    chon = sc.nextInt();
+                    String ss = "Chọn chức danh:                         ";
+                    System.out.print(ss);
+                    chon = checkIn(ss);
+                    sc.nextLine();
                     if (chon != 1 && chon != 2 && chon != 3) {
                         System.out.println("Chỉ chọn 1 hoặc 2 hoặc 3");
                     }
@@ -322,13 +305,13 @@ public class HumanResources {
             }
         }
 
-        System.out.println("----------------------------------------------------------");
+
     }
 
     // phương thức tìm kiếm nhân viên theo tên hoặc mã nhân viên
     public static void timkiemNV(ArrayList<Staff> listStaff) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("----------------------------------------------------------");
+
         System.out.println("5. Tìm kiếm nhân viên theo tên hoặc mã nhân viên ---------");
         System.out.println();
         System.out.print("Nhập tên nhân viên hoặc mã nhân viên:            ");
@@ -364,12 +347,12 @@ public class HumanResources {
         }
 
         System.out.println();
-        System.out.println("----------------------------------------------------------");
+
     }
 
     // hiển thị bản lương cho toàn bộ nhân viên trong công ty
     public static void hienthiBangLuongNV(ArrayList<Staff> listStaff) {
-        System.out.println("----------------------------------------------------------");
+
         System.out.println("6. Bảng lương nhân viên ----------------------------------");
         System.out.println();
         System.out.printf("%-10s%-20s%-10s%-15s%-15s%-10s%-10s%-22s%-10s\n","MaNV", "TenNV", "Tuoi", "HesoLuong", "NgayVaoLam",
@@ -383,12 +366,12 @@ public class HumanResources {
             System.out.println();
         }
         System.out.println();
-        System.out.println("----------------------------------------------------------");
+
     }
 
     // hiển thị bản lương cho toàn bộ nhân viên trong công ty theo thứ tự tăng dần
     public static void hienthiBangLuongNVTangDan(ArrayList<Staff> listStaff) {
-        System.out.println("----------------------------------------------------------");
+
         System.out.println("7. Bảng lương nhân viên theo thứ tự tăng dần -------------");
         System.out.println();
         System.out.printf("%-10s%-20s%-10s%-15s%-15s%-10s%-10s%-22s%-10s\n", "MaNV", "TenNV", "Tuoi", "HesoLuong", "NgayVaoLam",
@@ -415,12 +398,12 @@ public class HumanResources {
             System.out.println();
         }
         System.out.println();
-        System.out.println("----------------------------------------------------------");
+
     }
 
     // hiển thị bản lương cho toàn bộ nhân viên trong công ty theo thứ tự giảm dần
     public static void hienthiBangLuongNVGiamDan(ArrayList<Staff> listStaff) {
-        System.out.println("----------------------------------------------------------");
+
         System.out.println("8. Bảng lương nhân viên theo thứ tự giảm dần -------------");
         System.out.println();
         System.out.printf("%-10s%-20s%-10s%-15s%-15s%-10s%-10s%-22s%-10s\n", "MaNV", "TenNV", "Tuoi", "HesoLuong", "NgayVaoLam",
@@ -447,7 +430,7 @@ public class HumanResources {
             System.out.println();
         }
         System.out.println();
-        System.out.println("----------------------------------------------------------");
+
     }
 
     // phương thức cho phép chọn bộ phận làm việc của nhân viên
@@ -460,8 +443,9 @@ public class HumanResources {
         // chỉ cho phép chọn 1 trong 3 số: 1, 2, 3
         int chon;
         do {
-            System.out.print("Chọn bộ phận:                           ");
-            chon = sc.nextInt();
+            String s = "Chọn bộ phận:                           ";
+            System.out.print(s);
+            chon = checkIn(s);
             if (chon != 1 && chon != 2 && chon != 3) {
                 System.out.println("Chỉ chọn 1 hoặc 2 hoặc 3");
             }
@@ -477,5 +461,16 @@ public class HumanResources {
             nameDep = new Department("TE");
         }
         return nameDep;
+    }
+
+    //
+    public static int checkIn(String s) {
+        Scanner sc = new Scanner(System.in);
+        while (!sc.hasNextInt()) {
+            System.out.println("Vui lòng nhập lại !!! ---> Không phải số nguyên !!!");
+            System.out.print(s);
+            sc.nextLine();
+        }
+        return Integer.parseInt(sc.nextLine());
     }
 }

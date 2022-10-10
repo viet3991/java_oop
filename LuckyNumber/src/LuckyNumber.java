@@ -86,7 +86,12 @@ public class LuckyNumber {
         // Lặp lại trò chơi cho tới khi đoán đúng
         do {
             System.out.print("Bạn đoán: ");
-            guessNumber = sc.nextInt();
+            while (!sc.hasNextInt()) {
+                System.out.println("Vui lòng nhập số nguyên!!!");
+                System.out.print("Bạn đoán: ");
+                sc.nextLine();
+            }
+            guessNumber = Integer.parseInt(sc.nextLine());
             countGuess ++;
             totalGuess ++;
 

@@ -70,24 +70,28 @@ public class GradeStudent {
 
         // trọng số
         do {
-            System.out.print("Weight (0 - 100)?                      ");
+            String s = "Weight (0 - 100)?                      ";
+            System.out.print(s);
             // kiểm tra dữ liệu nhập vào, nếu không phải số nguyên thì phải nhập lại
-            while (!sc.hasNextInt()) {
-                System.out.println("That is not an integer! Enter again");
-                System.out.print("Weight (0 - 100)?                      ");
-                sc.nextLine();
-            }
-            weightMid = sc.nextInt();
+            weightMid = checkInt(s);
             if (weightMid < 0 || weightMid > 100) {
-                System.out.println("Enter weight again!!! --- weightMid < 0 or weightMid > 100)");
+                System.out.println("WeightMid must between 0 and 100");
             }
         }
         // kiểm tra trọng số, nếu không phù hợp phải nhập lại, trọng số phải lớn hơn 0 và nhỏ hơn 100
         while (weightMid < 0 || weightMid > 100);
 
         // điểm thi giữa kỳ
-        System.out.print("Score earned?                          ");
-        scoreMid = sc.nextInt();
+        do {
+            String ss = "Score earned? (0 - 100)                ";
+            System.out.print(ss);
+            scoreMid = checkInt(ss);
+            if (scoreMid < 0 || scoreMid > 100) {
+                System.out.println("ScoreMid must between 0 and 100");
+            }
+        }
+        // kiểm tra
+        while (scoreMid < 0 || scoreMid > 100);
 
         // gọi phương thức checkShift để kiểm tra điểm thi có thay đổi hay không.
         shiftAmount = checkShift(sc);
@@ -129,24 +133,28 @@ public class GradeStudent {
 
         // trọng số
         do {
-            System.out.print("Weight (0 - 100)?                      ");
+            String s = "Weight (0 - 100)?                      ";
+            System.out.print(s);
             // kiểm tra dữ liệu nhập vào, nếu không phải số nguyên thì phải nhập lại
-            while (!sc.hasNextInt()) {
-                System.out.println("That is not an integer! Enter again");
-                System.out.print("Weight (0 - 100)?                      ");
-                sc.nextLine();
-            }
-            weightFinal = sc.nextInt();
+            weightFinal = checkInt(s);
             if (weightFinal < 0 || (weightFinal + weightMid) > 100) {
-                System.out.println("Enter weight again!!!--- weightFinal < 0 or (weightFinal + weightMid) > 100");
+                System.out.println("WeightFinal must between 0 and 100");
             }
         }
         // kiểm tra trọng số, trọng số phải lớn hơn 0 và khi cộng với trọng số giữa kỳ phải nhỏ hơn 100
         while (weightFinal < 0 || (weightFinal + weightMid) > 100);
 
         // điểm thi cuối kỳ
-        System.out.print("Score earned?                          ");
-        scoreFinal = sc.nextInt();
+        do {
+            String ss = "Score earned? (0 - 100)                ";
+            System.out.print(ss);
+            scoreFinal = checkInt(ss);
+            if (scoreFinal < 0 || scoreFinal > 100) {
+                System.out.println("ScoreFinal must between 0 and 100");
+            }
+        }
+        // kiểm tra
+        while (scoreFinal < 0 || scoreFinal > 100);
 
         // gọi phương thức checkShift để kiểm tra điểm thi có thay đổi hay không.
         shiftAmount = checkShift(sc);
@@ -191,16 +199,12 @@ public class GradeStudent {
 
         // trọng số
         do {
-            System.out.print("Weight (0 - 100)?                      ");
+            String s = "Weight (0 - 100)?                      ";
+            System.out.print(s);
             // kiểm tra dữ liệu nhập vào, nếu không phải số nguyên thì phải nhập lại
-            while (!sc.hasNextInt()) {
-                System.out.println("That is not an integer! Enter again");
-                System.out.print("Weight (0 - 100)?                      ");
-                sc.nextLine();
-            }
-            weightHomework = sc.nextInt();
+            weightHomework = checkInt(s);
             if (weightHomework < 0 || (weightFinal + weightMid + weightHomework) != 100) {
-                System.out.println("Enter weight again!!!--- weight < 0 or (weightFinal + weightMid + weightHomework) != 100");
+                System.out.println("Weight must equal " + (100 - (weightMid + weightFinal)));
             }
         }
         // kiểm tra trọng số, nếu không phù hợp phải nhập lại
@@ -208,8 +212,9 @@ public class GradeStudent {
         while (weightHomework < 0 || (weightFinal + weightMid + weightHomework) != 100);
 
         // số lượng bài tập về nhà
-        System.out.print("Number of assignments?                 ");
-        numberAssignment = sc.nextInt();
+        String ss = "Number of assignments?                 ";
+        System.out.print(ss);
+        numberAssignment = checkInt(ss);
         // in ra điểm số và điểm số lớn nhất có thể đạt được ở mỗi bài tập về nhà
         // score: số điểm đạt được
         // max: số điểm lớn nhất có thể đạt được
@@ -306,19 +311,38 @@ public class GradeStudent {
     public static int checkShift(Scanner sc) {
         int shifted;
         int shiftAmount = 0;
-        System.out.print("Were scores shifted (1 = yes, 2 = no)? ");
-        shifted = sc.nextInt();
-        // chỉ chọn 1 hoặc 2, nếu không phải chọn lại
-        while (shifted != 1 && shifted != 2) {
-            System.out.println("--- Warning --- Only choose 1 or 2");
-            System.out.print("Were scores shifted (1 = yes, 2 = no)? ");
-            shifted = sc.nextInt();
+
+        do {
+            String s = "Were scores shifted (1 = yes, 2 = no)? ";
+            System.out.print(s);
+            // kiểm tra dữ liệu nhập vào, nếu không phải số nguyên thì phải nhập lại
+            shifted = checkInt(s);
+
+            if (shifted != 1 && shifted != 2) {
+                System.out.println("Only choose 1 or 2");
+            }
         }
+        // kiểm tra trọng số, nếu không phù hợp phải nhập lại, trọng số phải lớn hơn 0 và nhỏ hơn 100
+        while (shifted != 1 && shifted != 2);
+
         // số điểm tăng thêm hoặc giảm
         if (shifted == 1) {
-            System.out.print("Shift amount?                          ");
-            shiftAmount = sc.nextInt();
+            String ss = "Shift amount?                          ";
+            System.out.print(ss);
+            shiftAmount = checkInt(ss);
         }
         return shiftAmount;
+    }
+
+    //
+    public static int checkInt(String s) {
+        Scanner sc = new Scanner(System.in);
+        while (!sc.hasNextInt()) {
+            System.out.println("That is not an integer! Enter again");
+            System.out.print(s);
+            sc.nextLine();
+        }
+        return Integer.parseInt(sc.nextLine());
+
     }
 }
